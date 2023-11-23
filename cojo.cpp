@@ -1,6 +1,7 @@
 // INPUTS
 #define LED 47
 #define BUTTON 44
+#define PIR 7
 
 // OUTPUTS
 #define BUZZER 9
@@ -51,6 +52,14 @@ void activateAlarm(){
   digitalWrite(LED, 0);
 }
 
+typedef enum {
+  DESATIVADO,
+  ATIVADO,
+  DETECTOU,
+} MACHINE_STATE;
+
+MACHINE_STATE state;
+
 void setup()
 {
   pinMode(SEG_A, OUTPUT);
@@ -63,12 +72,19 @@ void setup()
 
   pinMode(BUTTON, INPUT_PULLUP);
   pinMode(LED, OUTPUT);
+  pinMode(PIR, INPUT);
 }
-
 
 void loop()
 {
-  if(!digitalRead(BUTTON)){
-    activateAlarm();
-  }
+  // if(!digitalRead(BUTTON)){
+  //   activateAlarm();
+  // }
+  // switcth(state){
+  //   case DESATIVADO:
+  //       if(!digitalRead(BUTTON)) activateAlarm();
+  //       break;
+  //   case ATIVADO: 
+  // }
+  digitalWrite(13, digitalRead(PIR));
 }
