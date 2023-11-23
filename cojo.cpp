@@ -1,6 +1,6 @@
 // INPUTS
-#define LED 5
-#define BUTTON 8
+#define LED 47
+#define BUTTON 44
 
 // OUTPUTS
 #define BUZZER 9
@@ -43,6 +43,14 @@ void printSevenSeg(int digit){
 }
 
 
+void activateAlarm(){
+  for(int i=0; i<40; i++){
+    digitalWrite(LED, i%2);
+    delay(250);
+  }
+  digitalWrite(LED, 0);
+}
+
 void setup()
 {
   pinMode(SEG_A, OUTPUT);
@@ -52,10 +60,15 @@ void setup()
   pinMode(SEG_E, OUTPUT);
   pinMode(SEG_F, OUTPUT);
   pinMode(SEG_G, OUTPUT);
+
+  pinMode(BUTTON, INPUT_PULLUP);
+  pinMode(LED, OUTPUT);
 }
 
 
 void loop()
 {
-
+  if(!digitalRead(BUTTON)){
+    activateAlarm();
+  }
 }
